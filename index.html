@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelFlow Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Floating Admin Button -->
+        <div class="admin-float">
+            <button id="admin-login-btn" class="float-btn">
+                <i class="fas fa-lock-open"></i>
+            </button>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="auth-header">
+                    <div class="logo-pulse">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h2>Admin Portal</h2>
+                </div>
+                <form id="login-form" class="auth-form">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="username" placeholder="Email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">
+                        <span>Login</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="auth-links">
+                        <a href="#" id="reset-password">Forgot password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="hidden">
+            <header class="admin-header">
+                <h1><i class="fas fa-cogs"></i> Gallery Dashboard</h1>
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </header>
+            
+            <div class="upload-section">
+                <div class="upload-container">
+                    <form id="upload-form" class="upload-box">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <input type="file" id="file-input" accept="image/*">
+                        <label for="file-input" class="file-label">
+                            <span class="browse-btn">Browse Files</span>
+                            or drag and drop
+                        </label>
+                        <div class="upload-details">
+                            <div id="upload-progress" class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <div id="upload-result" class="result"></div>
+                        </div>
+                        <button type="submit" class="upload-btn">
+                            <i class="fas fa-upload"></i> Upload Image
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="gallery-management">
+                <h2><i class="fas fa-images"></i> Manage Gallery</h2>
+                <div id="admin-gallery" class="gallery"></div>
+            </div>
+        </div>
+
+        <!-- Public Gallery -->
+        <div id="public-gallery">
+            <header class="gallery-header">
+                <h1><span class="gradient-text">PixelFlow</span> Gallery</h1>
+                <p class="subtitle">A visual journey through stunning moments</p>
+            </header>
+            
+            <div id="image-gallery" class="gallery"></div>
+        </div>
+
+        <!-- Fullscreen Viewer -->
+        <div id="image-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-fullscreen">&times;</span>
+                <div class="nav-arrows">
+                    <button id="prev-btn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-btn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="image-container">
+                    <img id="fullscreen-image" src="" alt="Fullscreen view">
+                </div>
+                <div class="image-meta">
+                    <span id="image-index"></span>
+                    <button id="download-btn" class="action-btn">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
